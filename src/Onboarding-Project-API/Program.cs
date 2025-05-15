@@ -11,7 +11,8 @@ public class Program
 
         // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
         builder.Services.AddOpenApi();
-
+        builder.Services.AddControllers();
+        
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
@@ -22,20 +23,10 @@ public class Program
 
         app.UseHttpsRedirection();
 
+        app.UseRouting();
         app.UseAuthorization();
-
-        var summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
-        app.MapGet("/api/v1/hello", (HttpContext httpContext) =>
-            {
-                
-                return "Hello World! " + DateTime.Now.ToString("O");
-            })
-            .WithName("GetWeatherForecast");
-
+        
+        app.UseEndpoints(endpoints => endpoints.MapControllers());
         app.Run();
     }
 }
