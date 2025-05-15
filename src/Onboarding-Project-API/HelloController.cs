@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Onboarding_Project_API;
@@ -6,20 +8,20 @@ namespace Onboarding_Project_API;
 [Route("api/v1/hello")]
 public class HelloController: ControllerBase
 {
+    
+    
     [HttpGet("{name}")]
     public IActionResult Get(string name)
     {
-        return Ok($"Hello World, {name}!" + DateTime.UtcNow.ToString("O"));
+        return Ok($"Hello World, {name}! " + DateTime.UtcNow.ToString("O"));
     }
-    [HttpPost]
-    public IActionResult Post([FromBody]CreateScoreRequest request)
-    {
-        return Ok($"Hello, {request.Name}!");
-    }
+    
+    
 }
+
 
 public class CreateScoreRequest 
 {
-    public string Name { get; set; }
-    public int Score { get; set; }
+    public string name { get; set; }
+    public int score { get; set; }
 }

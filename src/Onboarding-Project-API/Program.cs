@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace Onboarding_Project_API;
 
 public class Program
@@ -12,6 +14,13 @@ public class Program
         // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
         builder.Services.AddOpenApi();
         builder.Services.AddControllers();
+        
+        var dbHost = "localhost";
+        var dbName = "onboarding";
+        var dbPassword = "password";
+
+        var connectionString = $"server={dbHost};port=3306;database={dbName};user=root;password={dbPassword}";
+        builder.Services.AddDbContext<ScoreDbContext>(o => o.UseMySQL(connectionString));
         
         var app = builder.Build();
 
